@@ -14,9 +14,34 @@ module.exports = function(app, db) {
     });
   });
 
+  app.delete('/notes/:id', (req, res) => {
+    const id = req.params.id;
+    const details = { '_id': new ObjectID(id) };
+    db.collection('notes').remove(details, (err, item) => {
+      if (err) {
+        res.send({'error':'An error has occurred'});
+      } else {
+        res.send('Note ' + id + ' deleted!');
+      }
+    });
+  });
+
+  app.put('/notes/:id', (req, res) => {
+    const id = req.params.id;
+    const details = { '_id': new ObjectID(id) };
+    const note = { Body: req.body.Body , Title: req.body.Title };
+    db.collection('notes').update(details, note, (err, result) => {
+      if (err) {
+          res.send({'error':'An error has occurred'});
+      } else {
+          res.send(note);
+      }
+    });
+  });
+
   app.post('/notes', (req, res) => {
     console.log(req.body)
-    const note = { Body: req.body.Title , Title: req.body.Body };
+    const note = { Body: req.body.Body , Title: req.body.Title };
     db.collection('notes').insert(note, (err, result) => {
       if (err) {
         res.send({ 'error': 'An error has occurred' });
