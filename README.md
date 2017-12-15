@@ -35,3 +35,18 @@ Event
             Country: <int>,
           }
 }
+
+Fonctionalities :
+1st :
+  Users
+    Create an user account
+    Modifie user account
+    Delete user account
+  User can :
+    Create an Event
+    Modifie an Event
+    Delete an Event
+
+Implementation of this in BD and in JS.
+
+2nd :
